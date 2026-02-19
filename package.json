@@ -1,0 +1,13 @@
+{
+  "name": "retro-os-arcade",
+  "version": "1.0.0",
+  "description": "Klassische Betriebssysteme im Browser - v86 Emulator Arcade",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "download-assets": "bash scripts/download-assets.sh"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}

@@ -1,0 +1,7 @@
+node_modules/
+
+# Große Binär-Assets (werden via download-assets.sh geladen)
+public/v86/
+public/bios/
+public/images/*.img
+public/screenshots/

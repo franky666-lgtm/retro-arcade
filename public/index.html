@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro OS Arcade</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>RETRO OS ARCADE</h1>
+        <p>Wähle ein klassisches Betriebssystem und starte es direkt im Browser</p>
+    </header>
+
+    <main class="os-grid">
+        <!-- Windows 2.03 -->
+        <a href="emulator.html?os=win203" class="os-card" style="--card-accent: var(--neon-blue);">
+            <span class="icon">🪟</span>
+            <h2>Windows 2.03</h2>
+            <span class="year">1987</span>
+            <p class="desc">Microsofts zweite Windows-Version mit überlappenden Fenstern</p>
+            <span class="size">📦 4 MB</span>
+        </a>
+
+        <!-- Windows 3.1 -->
+        <a href="emulator.html?os=win31" class="os-card" style="--card-accent: var(--neon-green);">
+            <span class="icon">🖥️</span>
+            <h2>Windows 3.1</h2>
+            <span class="year">1992</span>
+            <p class="desc">Der Durchbruch - TrueType Fonts, Minesweeper und Multimedia</p>
+            <span class="size">📦 33 MB</span>
+        </a>
+
+        <!-- FreeDOS -->
+        <a href="emulator.html?os=freedos" class="os-card" style="--card-accent: var(--neon-yellow);">
+            <span class="icon">💾</span>
+            <h2>FreeDOS</h2>
+            <span class="year">1998</span>
+            <p class="desc">Freie DOS-Alternative - voll kompatibel mit MS-DOS Programmen</p>
+            <span class="size">📦 720 KB</span>
+        </a>
+
+        <!-- MS-DOS -->
+        <a href="emulator.html?os=msdos" class="os-card" style="--card-accent: var(--neon-pink);">
+            <span class="icon">⌨️</span>
+            <h2>MS-DOS</h2>
+            <span class="year">1981</span>
+            <p class="desc">Das Original - Microsofts legendäres Disk Operating System</p>
+            <span class="size">📦 8 MB</span>
+        </a>
+    </main>
+
+    <footer>
+        <p>Emuliert mit <a href="https://github.com/copy/v86" target="_blank">v86</a> · Retro OS Arcade</p>
+    </footer>
+</body>
+</html>

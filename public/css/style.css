@@ -1,0 +1,292 @@
+/* ═══════════════════════════════════════════
+   RETRO OS ARCADE - Dark Retro Theme
+   ═══════════════════════════════════════════ */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+:root {
+    --bg-dark: #0a0a0f;
+    --bg-card: #12121a;
+    --bg-card-hover: #1a1a2e;
+    --neon-blue: #00d4ff;
+    --neon-green: #39ff14;
+    --neon-pink: #ff006e;
+    --neon-purple: #b829dd;
+    --neon-yellow: #ffe600;
+    --text-main: #e0e0e0;
+    --text-dim: #888;
+    --border: #2a2a3a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'VT323', monospace;
+    background: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ── Scanline Overlay ── */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.08) 2px,
+        rgba(0, 0, 0, 0.08) 4px
+    );
+    z-index: 9999;
+}
+
+/* ── Header ── */
+header {
+    text-align: center;
+    padding: 3rem 1rem 2rem;
+}
+
+header h1 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 2rem;
+    color: var(--neon-blue);
+    text-shadow: 0 0 20px var(--neon-blue), 0 0 40px rgba(0, 212, 255, 0.3);
+    margin-bottom: 0.8rem;
+    letter-spacing: 2px;
+}
+
+header p {
+    font-size: 1.4rem;
+    color: var(--text-dim);
+}
+
+/* ── OS Grid ── */
+.os-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+/* ── OS Card ── */
+.os-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.os-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--card-accent);
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.os-card:hover {
+    background: var(--bg-card-hover);
+    transform: translateY(-4px);
+    border-color: var(--card-accent);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), 0 0 20px color-mix(in srgb, var(--card-accent) 20%, transparent);
+}
+
+.os-card:hover::before {
+    opacity: 1;
+}
+
+.os-card .icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.os-card h2 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.85rem;
+    color: var(--card-accent);
+    margin-bottom: 0.8rem;
+    text-shadow: 0 0 10px color-mix(in srgb, var(--card-accent) 40%, transparent);
+}
+
+.os-card .year {
+    font-size: 1.3rem;
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+}
+
+.os-card .desc {
+    font-size: 1.2rem;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.os-card .size {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.3rem 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    font-size: 1.1rem;
+    color: var(--text-dim);
+}
+
+/* ── Emulator Page ── */
+.emulator-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: var(--bg-card);
+    border-bottom: 1px solid var(--border);
+}
+
+.emulator-header h1 {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.9rem;
+    color: var(--neon-blue);
+}
+
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1.2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-main);
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-back:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--neon-blue);
+}
+
+.emulator-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    min-height: calc(100vh - 60px);
+}
+
+#screen_container {
+    background: #000;
+    border: 3px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), 0 0 15px rgba(0, 212, 255, 0.1);
+}
+
+#screen_container canvas {
+    display: block;
+}
+
+.controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.btn-ctrl {
+    padding: 0.6rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    color: var(--text-main);
+    font-family: 'VT323', monospace;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-ctrl:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--neon-blue);
+}
+
+.status-bar {
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    color: var(--text-dim);
+}
+
+.status-bar .running {
+    color: var(--neon-green);
+}
+
+/* ── Footer ── */
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-dim);
+    font-size: 1.1rem;
+}
+
+footer a {
+    color: var(--neon-blue);
+    text-decoration: none;
+}
+
+/* ── Loading Animation ── */
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    color: var(--neon-green);
+    font-size: 1.3rem;
+}
+
+.loading .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--border);
+    border-top: 3px solid var(--neon-blue);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.2rem;
+    }
+
+    .os-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+}
