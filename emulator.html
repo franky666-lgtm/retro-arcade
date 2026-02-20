@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro OS Arcade - Emulator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("sw.js").then((reg) => {
+                if (!navigator.serviceWorker.controller) {
+                    window.location.reload();
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="emulator-header">
+        <h1 id="os-title">Lade...</h1>
+        <a href="/" class="btn-back">← Zurück</a>
+    </div>
+
+    <div class="emulator-container">
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <span>System wird gestartet...</span>
+        </div>
+
+        <div id="screen_container" style="display: none;">
+            <div style="white-space: pre; font: 14px monospace; line-height: 14px"></div>
+            <canvas style="display: none"></canvas>
+        </div>
+
+        <div class="controls" style="display: none;" id="controls">
+            <button class="btn-ctrl" onclick="emulator.restart()">⟳ Neustart</button>
+            <button class="btn-ctrl" onclick="toggleFullscreen()">⛶ Vollbild</button>
+            <button class="btn-ctrl" onclick="emulator.keyboard_send_scancodes([0x1D, 0x38, 0x53])">Ctrl+Alt+Del</button>
+        </div>
+
+        <div class="status-bar" id="status">
+            Status: <span class="running">Initialisiere...</span>
+        </div>
+    </div>
+
+    <script src="v86/libv86.js"></script>
+    <script src="js/emulator.js"></script>
+</body>
+</html>
