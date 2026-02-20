@@ -7,9 +7,13 @@
     <link rel="stylesheet" href="css/style.css">
     <script>
         if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("sw.js").then((reg) => {
+            navigator.serviceWorker.register("sw.js").then(function() {
                 if (!navigator.serviceWorker.controller) {
-                    window.location.reload();
+                    // Nur einmal reloaden (verhindert Endlos-Loop)
+                    if (!sessionStorage.getItem("sw_reload")) {
+                        sessionStorage.setItem("sw_reload", "1");
+                        window.location.reload();
+                    }
                 }
             });
         }
@@ -69,7 +73,7 @@
     </main>
 
     <footer>
-        <p>Emuliert mit <a href="https://github.com/copy/v86" target="_blank">v86</a> · Retro OS Arcade</p>
+        <p>Emuliert mit <a href="https://github.com/copy/v86" target="_blank" rel="noopener noreferrer">v86</a> · Retro OS Arcade</p>
     </footer>
 </body>
 </html>
