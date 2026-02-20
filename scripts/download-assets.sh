@@ -59,6 +59,7 @@ echo -e "${BLUE}[3/3] Disk Images${NC}"
 IMG_BASE="https://i.copy.sh"
 download "$IMG_BASE/windows2.img" "$PUBLIC_DIR/images/windows2.img" "Windows 2.03 (4 MB)"
 download "$IMG_BASE/win31.img" "$PUBLIC_DIR/images/win31.img" "Windows 3.1 (33 MB)"
+# Windows 95 (~450 MB) wird direkt vom CDN gestreamt (use_parts in emulator.js)
 download "$IMG_BASE/freedos722.img" "$PUBLIC_DIR/images/freedos722.img" "FreeDOS (720 KB)"
 download "$IMG_BASE/msdos.img" "$PUBLIC_DIR/images/msdos.img" "MS-DOS (8 MB)"
 echo ""

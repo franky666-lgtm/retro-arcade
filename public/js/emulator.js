@@ -17,6 +17,19 @@ const OS_CONFIGS = {
         hda: { url: "images/win31.img", size: 33 * 1024 * 1024 },
         boot_order: 0x132
     },
+    win95: {
+        name: "Windows 95",
+        memory_size: 64 * 1024 * 1024,
+        vga_memory_size: 8 * 1024 * 1024,
+        hda: {
+            url: "https://i.copy.sh/windows95-v2/.img",
+            size: 471859200,
+            async: true,
+            fixed_chunk_size: 256 * 1024,
+            use_parts: true
+        },
+        boot_order: 0x132
+    },
     freedos: {
         name: "FreeDOS",
         memory_size: 16 * 1024 * 1024,

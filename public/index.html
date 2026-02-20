@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retro OS Arcade</title>
     <link rel="stylesheet" href="css/style.css">
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("sw.js").then((reg) => {
+                if (!navigator.serviceWorker.controller) {
+                    window.location.reload();
+                }
+            });
+        }
+    </script>
 </head>
 <body>
     <header>
@@ -29,6 +38,15 @@
             <span class="year">1992</span>
             <p class="desc">Der Durchbruch - TrueType Fonts, Minesweeper und Multimedia</p>
             <span class="size">📦 33 MB</span>
+        </a>
+
+        <!-- Windows 95 -->
+        <a href="emulator.html?os=win95" class="os-card" style="--card-accent: var(--neon-purple);">
+            <span class="icon">🚀</span>
+            <h2>Windows 95</h2>
+            <span class="year">1995</span>
+            <p class="desc">Start Me Up - der Klassiker mit Startmenü</p>
+            <span class="size">📦 ~450 MB (Stream)</span>
         </a>
 
         <!-- FreeDOS -->
