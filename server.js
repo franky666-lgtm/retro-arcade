@@ -13,9 +13,9 @@ app.use(express.static(path.join(__dirname, 'public'), {
         if (filePath.endsWith('.wasm')) {
             res.set('Content-Type', 'application/wasm');
         }
-        // SharedArrayBuffer Support
+        // SharedArrayBuffer Support (credentialless erlaubt Cross-Origin CDN-Streaming)
         res.set('Cross-Origin-Opener-Policy', 'same-origin');
-        res.set('Cross-Origin-Embedder-Policy', 'require-corp');
+        res.set('Cross-Origin-Embedder-Policy', 'credentialless');
     }
 }));
 

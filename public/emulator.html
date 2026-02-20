@@ -7,9 +7,12 @@
     <link rel="stylesheet" href="css/style.css">
     <script>
         if ("serviceWorker" in navigator) {
-            navigator.serviceWorker.register("sw.js").then((reg) => {
+            navigator.serviceWorker.register("sw.js").then(function() {
                 if (!navigator.serviceWorker.controller) {
-                    window.location.reload();
+                    if (!sessionStorage.getItem("sw_reload")) {
+                        sessionStorage.setItem("sw_reload", "1");
+                        window.location.reload();
+                    }
                 }
             });
         }

@@ -46,14 +46,19 @@ const OS_CONFIGS = {
     }
 };
 
-// OS aus URL-Parameter lesen
+// OS aus URL-Parameter lesen (mit Validierung gegen XSS + Prototype Pollution)
 const params = new URLSearchParams(window.location.search);
 const osKey = params.get("os");
-const config = OS_CONFIGS[osKey];
+const config = osKey && Object.prototype.hasOwnProperty.call(OS_CONFIGS, osKey) ? OS_CONFIGS[osKey] : null;
 
 if (!config) {
     document.getElementById("os-title").textContent = "Unbekanntes OS";
-    document.getElementById("loading").innerHTML = '<span style="color: var(--neon-pink);">Fehler: Unbekanntes Betriebssystem "' + (osKey || '') + '"</span>';
+    const errorSpan = document.createElement("span");
+    errorSpan.style.color = "var(--neon-pink)";
+    errorSpan.textContent = 'Fehler: Unbekanntes Betriebssystem "' + (osKey || '') + '"';
+    const loadingEl = document.getElementById("loading");
+    loadingEl.textContent = "";
+    loadingEl.appendChild(errorSpan);
     throw new Error("Unknown OS: " + osKey);
 }
 
@@ -87,8 +92,12 @@ let emulator;
 try {
     emulator = new V86(emulatorConfig);
 } catch (e) {
-    document.getElementById("loading").innerHTML =
-        '<span style="color: var(--neon-pink);">Fehler beim Laden: ' + e.message + '</span>';
+    const errorSpan = document.createElement("span");
+    errorSpan.style.color = "var(--neon-pink)";
+    errorSpan.textContent = "Fehler beim Laden: " + e.message;
+    const loadingEl = document.getElementById("loading");
+    loadingEl.textContent = "";
+    loadingEl.appendChild(errorSpan);
     throw e;
 }
 
