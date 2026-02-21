@@ -59,7 +59,30 @@ echo -e "${BLUE}[3/3] Disk Images${NC}"
 IMG_BASE="https://i.copy.sh"
 download "$IMG_BASE/windows2.img" "$PUBLIC_DIR/images/windows2.img" "Windows 2.03 (4 MB)"
 download "$IMG_BASE/win31.img" "$PUBLIC_DIR/images/win31.img" "Windows 3.1 (33 MB)"
-# Windows 95 (~450 MB) wird direkt vom CDN gestreamt (use_parts in emulator.js)
+download_win95() {
+    local dest="$PUBLIC_DIR/images/windows95.img"
+    if [ -f "$dest" ]; then
+        echo -e "  ${GREEN}✓${NC} Windows 95 (~450 MB) (bereits vorhanden)"
+        return 0
+    fi
+    echo -e "  ${YELLOW}↓${NC} Windows 95 (~450 MB) - 1800 Chunks von CDN ..."
+    local tmpdir=$(mktemp -d)
+    local base="https://i.copy.sh/windows95-v2"
+    seq 0 1799 | xargs -P 16 -I{} bash -c \
+        'curl -sf -o "'"$tmpdir"'/chunk_{}" "'"$base"'/$(({} * 262144))-$((({} + 1) * 262144)).img"' 2>&1
+    > "$dest"
+    for i in $(seq 0 1799); do cat "$tmpdir/chunk_$i" >> "$dest"; done
+    rm -rf "$tmpdir"
+    local actual=$(stat -c%s "$dest")
+    if [ "$actual" -eq 471859200 ]; then
+        echo -e "  ${GREEN}✓${NC} Windows 95 (~450 MB)"
+    else
+        echo -e "  ✗ FEHLER bei Windows 95 (Groesse: $actual)"
+        rm -f "$dest"
+        return 1
+    fi
+}
+download_win95
 download "$IMG_BASE/freedos722.img" "$PUBLIC_DIR/images/freedos722.img" "FreeDOS (720 KB)"
 download "$IMG_BASE/msdos.img" "$PUBLIC_DIR/images/msdos.img" "MS-DOS (8 MB)"
 echo ""
