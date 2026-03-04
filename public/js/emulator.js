@@ -21,7 +21,7 @@ var OS_CONFIGS = {
         name: "Windows 95",
         memory_size: 64 * 1024 * 1024,
         vga_memory_size: 8 * 1024 * 1024,
-        hda: { url: "images/windows95.img", async: true, size: 471859200 },
+        hda: { url: "https://pub-a5fee473aa4446a4a4f67fa9142c22a1.r2.dev/windows95.img", async: true, size: 471859200 },
         boot_order: 0x132,
         network_relay_url: "wss://relay.widgetry.org/"
     },
