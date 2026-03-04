@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Retro OS Arcade - Emulator</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕹️</text></svg>">
     <link rel="stylesheet" href="css/style.css">
     <script>
         if ("serviceWorker" in navigator) {
@@ -20,14 +21,19 @@
 </head>
 <body>
     <div class="emulator-header">
-        <h1 id="os-title">Lade...</h1>
-        <a href="/" class="btn-back">← Zurück</a>
+        <div class="header-left">
+            <span class="sbp-badge-small">SBP Club</span>
+            <h1 id="os-title">Lade...</h1>
+        </div>
+        <a href="/" class="btn-back">&larr; Zurueck</a>
     </div>
 
     <div class="emulator-container">
         <div id="loading" class="loading">
-            <div class="spinner"></div>
-            <span>System wird gestartet...</span>
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <span id="loadingText">System wird gestartet...</span>
         </div>
 
         <div id="screen_container" style="display: none;">
@@ -36,9 +42,12 @@
         </div>
 
         <div class="controls" style="display: none;" id="controls">
-            <button class="btn-ctrl" onclick="emulator.restart()">⟳ Neustart</button>
-            <button class="btn-ctrl" onclick="toggleFullscreen()">⛶ Vollbild</button>
+            <button class="btn-ctrl" onclick="emulator.restart()">&#10227; Neustart</button>
+            <button class="btn-ctrl" onclick="toggleFullscreen()">&#9974; Vollbild</button>
             <button class="btn-ctrl" onclick="emulator.keyboard_send_scancodes([0x1D, 0x38, 0x53])">Ctrl+Alt+Del</button>
+            <button class="btn-ctrl" id="btnSound" onclick="toggleSound()">&#128266; Sound An</button>
+            <button class="btn-ctrl btn-save" onclick="doSaveState()">&#128190; Speichern</button>
+            <button class="btn-ctrl btn-restore" id="btnRestore" onclick="doRestoreState()" style="display:none;">&#128194; Wiederherstellen</button>
         </div>
 
         <div class="status-bar" id="status">
@@ -46,7 +55,15 @@
         </div>
     </div>
 
+    <script src="js/auth.js"></script>
+    <script>
+        // Auth check — redirect if not verified
+        if (!ARCADE_AUTH.requireAuth()) {
+            throw new Error('Not authorized');
+        }
+    </script>
     <script src="v86/libv86.js"></script>
+    <script src="js/savestate.js"></script>
     <script src="js/emulator.js"></script>
 </body>
 </html>
