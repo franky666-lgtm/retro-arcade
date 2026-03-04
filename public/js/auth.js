@@ -38,6 +38,13 @@ var ARCADE_AUTH = (function() {
         window.history.replaceState({}, '', url.toString());
     }
 
+    // Escape HTML to prevent XSS
+    function escapeHtml(str) {
+        var div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+    }
+
     // Show access denied teaser
     function showAccessDenied(container, message) {
         container.innerHTML = '';
@@ -46,7 +53,7 @@ var ARCADE_AUTH = (function() {
         denied.innerHTML =
             '<div class="denied-icon">🔒</div>' +
             '<h2>Club-Exclusive Arcade</h2>' +
-            '<p class="denied-msg">' + (message || 'Diese Arcade ist exklusiv fuer Social Boost Pro Club-Mitglieder.') + '</p>' +
+            '<p class="denied-msg">' + escapeHtml(message || 'Diese Arcade ist exklusiv fuer Social Boost Pro Club-Mitglieder.') + '</p>' +
             '<a href="' + SBP_URL + '/Club" class="btn-join-club">Club beitreten</a>' +
             '<p class="denied-sub">Bereits Mitglied? <a href="' + SBP_URL + '">Einloggen</a> und ueber den Club-Bereich starten.</p>';
         container.appendChild(denied);
@@ -75,13 +82,15 @@ var ARCADE_AUTH = (function() {
             return Promise.resolve(false);
         }
 
+        // Clean token from URL immediately (before verification)
+        cleanUrl();
+
         // Show loading while verifying
         contentContainer.innerHTML = '<div class="auth-loading"><div class="spinner"></div><span>Token wird verifiziert...</span></div>';
 
         return verifyToken(token).then(function(result) {
             if (result && result.valid) {
                 sessionStorage.setItem('arcade_verified', 'true');
-                cleanUrl();
                 // Reload to show actual content (simplest approach)
                 window.location.reload();
                 return true;

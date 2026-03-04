@@ -24,13 +24,10 @@ var ARCADE_SAVE = (function() {
     }
 
     function saveState(osKey, emulator) {
-        return new Promise(function(resolve, reject) {
-            emulator.save_state(function(err, stateData) {
-                if (err) {
-                    reject(err);
-                    return;
-                }
-                openDB().then(function(db) {
+        // v86 save_state() returns a Promise<ArrayBuffer>
+        return emulator.save_state().then(function(stateData) {
+            return openDB().then(function(db) {
+                return new Promise(function(resolve, reject) {
                     var tx = db.transaction(STORE_NAME, 'readwrite');
                     var store = tx.objectStore(STORE_NAME);
                     var entry = {
@@ -41,7 +38,7 @@ var ARCADE_SAVE = (function() {
                     var req = store.put(entry, osKey);
                     req.onsuccess = function() { resolve(true); };
                     req.onerror = function(e) { reject(e.target.error); };
-                }).catch(reject);
+                });
             });
         });
     }
