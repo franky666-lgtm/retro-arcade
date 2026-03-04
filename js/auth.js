@@ -47,6 +47,8 @@ var ARCADE_AUTH = (function() {
 
     // Show access denied teaser
     function showAccessDenied(container, message) {
+        container.style.display = '';
+        container.classList.remove('auth-hidden');
         container.innerHTML = '';
         var denied = document.createElement('div');
         denied.className = 'access-denied';
@@ -86,6 +88,8 @@ var ARCADE_AUTH = (function() {
         cleanUrl();
 
         // Show loading while verifying
+        contentContainer.style.display = '';
+        contentContainer.classList.remove('auth-hidden');
         contentContainer.innerHTML = '<div class="auth-loading"><div class="spinner"></div><span>Token wird verifiziert...</span></div>';
 
         return verifyToken(token).then(function(result) {
