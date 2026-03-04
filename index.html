@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Retro OS Arcade</title>
+    <title>Retro OS Arcade - Social Boost Pro Club</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🕹️</text></svg>">
     <link rel="stylesheet" href="css/style.css">
     <script>
         if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("sw.js").then(function() {
                 if (!navigator.serviceWorker.controller) {
-                    // Nur einmal reloaden (verhindert Endlos-Loop)
                     if (!sessionStorage.getItem("sw_reload")) {
                         sessionStorage.setItem("sw_reload", "1");
                         window.location.reload();
@@ -20,60 +20,84 @@
     </script>
 </head>
 <body>
-    <header>
-        <h1>RETRO OS ARCADE</h1>
-        <p>Wähle ein klassisches Betriebssystem und starte es direkt im Browser</p>
-    </header>
+    <!-- Mobile Warning -->
+    <div class="mobile-warning" id="mobileWarning">
+        <span>📱</span> Diese Arcade funktioniert am besten auf einem Desktop-Computer mit Tastatur & Maus.
+        <button onclick="this.parentElement.style.display='none'" class="mobile-warning-close">&times;</button>
+    </div>
 
-    <main class="os-grid">
-        <!-- Windows 2.03 -->
-        <a href="emulator.html?os=win203" class="os-card" style="--card-accent: var(--neon-blue);">
-            <span class="icon">🪟</span>
-            <h2>Windows 2.03</h2>
-            <span class="year">1987</span>
-            <p class="desc">Microsofts zweite Windows-Version mit überlappenden Fenstern</p>
-            <span class="size">📦 4 MB</span>
-        </a>
+    <!-- Auth Gate Container — content hidden until verified -->
+    <div id="arcadeContent" class="auth-hidden">
+        <header>
+            <div class="sbp-badge">Social Boost Pro Club</div>
+            <h1>RETRO OS ARCADE</h1>
+            <p>Waehle ein klassisches Betriebssystem und starte es direkt im Browser</p>
+        </header>
 
-        <!-- Windows 3.1 -->
-        <a href="emulator.html?os=win31" class="os-card" style="--card-accent: var(--neon-green);">
-            <span class="icon">🖥️</span>
-            <h2>Windows 3.1</h2>
-            <span class="year">1992</span>
-            <p class="desc">Der Durchbruch - TrueType Fonts, Minesweeper und Multimedia</p>
-            <span class="size">📦 33 MB</span>
-        </a>
+        <main class="os-grid">
+            <!-- Windows 2.03 -->
+            <a href="emulator.html?os=win203" class="os-card" style="--card-accent: var(--neon-blue);">
+                <span class="icon">🪟</span>
+                <h2>Windows 2.03</h2>
+                <span class="year">1987</span>
+                <p class="desc">Microsofts zweite Windows-Version mit ueberlappenden Fenstern</p>
+                <span class="size">📦 4 MB</span>
+            </a>
 
-        <!-- Windows 95 -->
-        <a href="emulator.html?os=win95" class="os-card" style="--card-accent: var(--neon-purple);">
-            <span class="icon">🚀</span>
-            <h2>Windows 95</h2>
-            <span class="year">1995</span>
-            <p class="desc">Start Me Up - der Klassiker mit Startmenü</p>
-            <span class="size">📦 ~450 MB (Stream)</span>
-        </a>
+            <!-- Windows 3.1 -->
+            <a href="emulator.html?os=win31" class="os-card" style="--card-accent: var(--neon-green);">
+                <span class="icon">🖥️</span>
+                <h2>Windows 3.1</h2>
+                <span class="year">1992</span>
+                <p class="desc">Der Durchbruch - TrueType Fonts, Minesweeper und Multimedia</p>
+                <span class="size">📦 33 MB</span>
+            </a>
 
-        <!-- FreeDOS -->
-        <a href="emulator.html?os=freedos" class="os-card" style="--card-accent: var(--neon-yellow);">
-            <span class="icon">💾</span>
-            <h2>FreeDOS</h2>
-            <span class="year">1998</span>
-            <p class="desc">Freie DOS-Alternative - voll kompatibel mit MS-DOS Programmen</p>
-            <span class="size">📦 720 KB</span>
-        </a>
+            <!-- Windows 95 -->
+            <a href="emulator.html?os=win95" class="os-card" style="--card-accent: var(--neon-purple);">
+                <span class="icon">🚀</span>
+                <h2>Windows 95</h2>
+                <span class="year">1995</span>
+                <p class="desc">Start Me Up - der Klassiker mit Startmenue</p>
+                <span class="size">📦 ~450 MB (Stream)</span>
+            </a>
 
-        <!-- MS-DOS -->
-        <a href="emulator.html?os=msdos" class="os-card" style="--card-accent: var(--neon-pink);">
-            <span class="icon">⌨️</span>
-            <h2>MS-DOS</h2>
-            <span class="year">1981</span>
-            <p class="desc">Das Original - Microsofts legendäres Disk Operating System</p>
-            <span class="size">📦 8 MB</span>
-        </a>
-    </main>
+            <!-- KolibriOS -->
+            <a href="emulator.html?os=kolibri" class="os-card" style="--card-accent: #ff8c00;">
+                <span class="icon">🐦</span>
+                <h2>KolibriOS</h2>
+                <span class="year">2004</span>
+                <p class="desc">Komplett in Assembly geschrieben - bootet in unter 3 Sekunden!</p>
+                <span class="size">📦 1.4 MB</span>
+            </a>
 
-    <footer>
-        <p>Emuliert mit <a href="https://github.com/copy/v86" target="_blank" rel="noopener noreferrer">v86</a> · Retro OS Arcade</p>
-    </footer>
+            <!-- FreeDOS -->
+            <a href="emulator.html?os=freedos" class="os-card" style="--card-accent: var(--neon-yellow);">
+                <span class="icon">💾</span>
+                <h2>FreeDOS</h2>
+                <span class="year">1998</span>
+                <p class="desc">Freie DOS-Alternative - voll kompatibel mit MS-DOS Programmen</p>
+                <span class="size">📦 720 KB</span>
+            </a>
+
+            <!-- MS-DOS -->
+            <a href="emulator.html?os=msdos" class="os-card" style="--card-accent: var(--neon-pink);">
+                <span class="icon">⌨️</span>
+                <h2>MS-DOS</h2>
+                <span class="year">1981</span>
+                <p class="desc">Das Original - Microsofts legendaeres Disk Operating System</p>
+                <span class="size">📦 8 MB</span>
+            </a>
+        </main>
+
+        <footer>
+            <p>Powered by <a href="https://social-boost-pro.com" target="_blank" rel="noopener noreferrer">Social Boost Pro</a> Club · Emuliert mit <a href="https://github.com/copy/v86" target="_blank" rel="noopener noreferrer">v86</a></p>
+        </footer>
+    </div>
+
+    <script src="js/auth.js"></script>
+    <script>
+        ARCADE_AUTH.gate(document.getElementById('arcadeContent'));
+    </script>
 </body>
 </html>
