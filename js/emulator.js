@@ -110,8 +110,6 @@ try {
 }
 
 // ── Progress Bar ──
-var totalBytes = config.hda ? config.hda.size : (config.fda ? config.fda.size : 0);
-var loadedBytes = 0;
 var progressBar = document.getElementById("progressBar");
 var loadingText = document.getElementById("loadingText");
 
@@ -206,17 +204,24 @@ function doRestoreState() {
     btn.disabled = true;
     ARCADE_SAVE.loadState(osKey).then(function(entry) {
         if (entry && entry.data) {
-            emulator.restore_state(entry.data);
-            btn.innerHTML = '&#10004; Wiederhergestellt!';
-            setTimeout(function() {
-                btn.innerHTML = '&#128194; Wiederherstellen';
-                btn.disabled = false;
-            }, 2000);
+            // v86 requires stop -> restore -> run sequence
+            return emulator.stop().then(function() {
+                return emulator.restore_state(entry.data);
+            }).then(function() {
+                emulator.run();
+                btn.innerHTML = '&#10004; Wiederhergestellt!';
+                setTimeout(function() {
+                    btn.innerHTML = '&#128194; Wiederherstellen';
+                    btn.disabled = false;
+                }, 2000);
+            });
         }
     }).catch(function(err) {
         console.error('Restore failed:', err);
         btn.innerHTML = '&#10008; Fehler';
         btn.disabled = false;
+        // Try to restart emulator if it was stopped
+        try { emulator.run(); } catch(_) {}
         setTimeout(function() {
             btn.innerHTML = '&#128194; Wiederherstellen';
         }, 2000);

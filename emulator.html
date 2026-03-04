@@ -57,9 +57,10 @@
 
     <script src="js/auth.js"></script>
     <script>
-        // Auth check — redirect if not verified
+        // Auth check — redirect and block page if not verified
         if (!ARCADE_AUTH.requireAuth()) {
-            throw new Error('Not authorized');
+            document.write('<html><body style="background:#0a0a0f;color:#888;text-align:center;margin-top:40vh;font-family:monospace"><p>Weiterleitung...</p></body></html>');
+            document.close();
         }
     </script>
     <script src="v86/libv86.js"></script>
