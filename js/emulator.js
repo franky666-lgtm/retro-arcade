@@ -133,13 +133,35 @@ emulator.add_listener("emulator-ready", function () {
     document.getElementById("loading").style.display = "none";
     document.getElementById("screen_container").style.display = "block";
     document.getElementById("controls").style.display = "flex";
-    document.getElementById("status").innerHTML = 'Status: <span class="running">Laeuft</span>';
+    document.getElementById("status").innerHTML = 'Status: <span class="running">Laeuft</span> — <span class="hint">Klicke ins Bild fuer Maus-Capture (Esc = freigeben)</span>';
 
     // Check for saved state
     if (typeof ARCADE_SAVE !== 'undefined') {
         ARCADE_SAVE.hasState(osKey).then(function(has) {
             if (has) {
                 document.getElementById("btnRestore").style.display = '';
+            }
+        });
+    }
+
+    // ── Pointer Lock: Capture mouse inside emulator ──
+    var screenContainer = document.getElementById("screen_container");
+    var canvas = screenContainer.querySelector("canvas");
+
+    if (canvas) {
+        canvas.addEventListener("click", function() {
+            if (!document.pointerLockElement) {
+                canvas.requestPointerLock();
+            }
+        });
+
+        document.addEventListener("pointerlockchange", function() {
+            if (document.pointerLockElement === canvas) {
+                screenContainer.classList.add("mouse-captured");
+                document.getElementById("status").innerHTML = 'Status: <span class="running">Laeuft</span> — <span class="hint">Maus eingefangen (Esc = freigeben)</span>';
+            } else {
+                screenContainer.classList.remove("mouse-captured");
+                document.getElementById("status").innerHTML = 'Status: <span class="running">Laeuft</span> — <span class="hint">Klicke ins Bild fuer Maus-Capture (Esc = freigeben)</span>';
             }
         });
     }

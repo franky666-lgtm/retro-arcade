@@ -42,6 +42,7 @@
         </div>
 
         <div class="controls" style="display: none;" id="controls">
+            <button class="btn-ctrl btn-exit" onclick="if(confirm('Arcade verlassen?')) window.location.href='/';">&#10006; Verlassen</button>
             <button class="btn-ctrl" onclick="emulator.restart()">&#10227; Neustart</button>
             <button class="btn-ctrl" onclick="toggleFullscreen()">&#9974; Vollbild</button>
             <button class="btn-ctrl" onclick="emulator.keyboard_send_scancodes([0x1D, 0x38, 0x53])">Ctrl+Alt+Del</button>
