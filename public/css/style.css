@@ -299,6 +299,15 @@ header p {
     cursor: not-allowed;
 }
 
+.btn-exit {
+    border-color: var(--neon-pink);
+    color: var(--neon-pink);
+}
+
+.btn-exit:hover {
+    background: rgba(255, 0, 110, 0.15);
+}
+
 .btn-save {
     border-color: var(--neon-green);
     color: var(--neon-green);
@@ -307,6 +316,16 @@ header p {
 .btn-restore {
     border-color: var(--neon-purple);
     color: var(--neon-purple);
+}
+
+/* ── Pointer Lock: hide browser cursor when captured ── */
+#screen_container.mouse-captured {
+    cursor: none;
+}
+
+.status-bar .hint {
+    color: var(--neon-yellow);
+    font-size: 1rem;
 }
 
 .status-bar {
