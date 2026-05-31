@@ -14,7 +14,7 @@ var OS_CONFIGS = {
         name: "Windows 3.1",
         memory_size: 32 * 1024 * 1024,
         vga_memory_size: 2 * 1024 * 1024,
-        hda: { url: "images/win31.img", size: 33 * 1024 * 1024 },
+        hda: { url: "https://pub-a5fee473aa4446a4a4f67fa9142c22a1.r2.dev/win31.img", async: true, size: 34603008 },
         boot_order: 0x132
     },
     win95: {

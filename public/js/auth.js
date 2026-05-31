@@ -5,8 +5,8 @@
 var ARCADE_AUTH = (function() {
     'use strict';
 
-    var SUPABASE_URL = 'https://fmdxacmweuuzhjbnzktp.supabase.co';
-    var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZtZHhhY213ZXV1emhqYm56a3RwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjQ3OTQ2MjYsImV4cCI6MjA4MDM3MDYyNn0.meRcL1wRqMbOu9qpIzMPCA0dLxsobmgYqn0NYLdqaO0';
+    var SUPABASE_URL = 'https://idgxlmteaucnhkopdqiy.supabase.co';
+    var SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlkZ3hsbXRlYXVjbmhrb3BkcWl5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzU2MzE5OTIsImV4cCI6MjA5MTIwNzk5Mn0.7dkp2Nj88x1qtVgOplrOmT-kG1WZ8bkYgAW5Or_vMX0';
     var SBP_URL = 'https://social-boost-pro.com';
 
     // Check if already verified this session
