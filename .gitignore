@@ -5,4 +5,6 @@ public/v86/
 public/bios/
 public/images/*.img
 public/screenshots/
-.claude/
+.claude/*
+!.claude/plans/
+!.claude/memory/
