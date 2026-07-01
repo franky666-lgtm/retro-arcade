@@ -8,3 +8,4 @@ public/screenshots/
 .claude/*
 !.claude/plans/
 !.claude/memory/
+.claude/
